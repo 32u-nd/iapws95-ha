@@ -1,0 +1,11 @@
+{
+  "title": "IAPWS-95 Water Properties",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configure IAPWS-95",
+        "description": "Select input sensors and units."
+      }
+    }
+  }
+}

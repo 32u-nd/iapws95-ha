@@ -1,0 +1,12 @@
+DOMAIN = "iapws95"
+
+DEFAULT_TEMP_UNIT = "C"
+DEFAULT_PRESSURE_UNIT = "bar"
+
+SUPPORTED_TEMP_UNITS = ["C", "F", "K"]
+SUPPORTED_PRESSURE_UNITS = ["bar", "psi", "Pa", "kPa", "MPa"]
+
+# SI defaults for outputs
+OUTPUT_SI = "si"
+OUTPUT_IMPERIAL = "imperial"
+SUPPORTED_OUTPUT_UNITS = [OUTPUT_SI, OUTPUT_IMPERIAL]

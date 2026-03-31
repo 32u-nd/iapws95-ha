@@ -1,0 +1,14 @@
+# IAPWS‑95 Water Properties (Region 1 Only)
+
+Home Assistant integration providing thermodynamic water properties using the IAPWS‑95 equation of state. Region‑1 only (liquid water; up to ~350 °C, up to ~100 bar)! This package is based on Python library iapws, version IAPWS‑95 / R6‑95(2018).
+
+## ✅ Features
+- Temperature input (°C/K/F)
+- Pressure input (bar/psi/Pa/kPa/MPa)
+- SI or Imperial output
+- Density, enthalpy, entropy, cp, cv, viscosity, thermal conductivity, speed of sound
+
+## ✅ Installation (HACS)
+1. Add repository
+2. Install integration
+3. Configure via UI
