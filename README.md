@@ -12,3 +12,6 @@ Home Assistant integration providing thermodynamic water properties using the IA
 1. Add repository
 2. Install integration
 3. Configure via UI
+
+## Device with entities in HA (German language)
+<img width="1254" height="916" alt="grafik" src="https://github.com/user-attachments/assets/f998fbc6-77d1-4d78-9cdf-1448bf00b11c" />
