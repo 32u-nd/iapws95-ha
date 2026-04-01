@@ -8,15 +8,15 @@ from .const import DOMAIN
 from .iapws_region1 import compute_region1
 
 OUTPUT_PROPERTIES = {
-    "density": ("Dichte", "kg/m³", "mdi:water"),
-    "enthalpy": ("Enthalpie", "kJ/kg", "mdi:fire"),
-    "entropy": ("Entropie", "kJ/kg·K", "mdi:chart-bell-curve"),
-    "internal_energy": ("Innere Energie", "kJ/kg", "mdi:lightning-bolt"),
-    "cp": ("Wärmekapazität cp", "kJ/kg·K", "mdi:thermometer"),
-    "cv": ("Wärmekapazität cv", "kJ/kg·K", "mdi:thermometer"),
-    "speed_of_sound": ("Schallgeschwindigkeit", "m/s", "mdi:sine-wave"),
-    "viscosity": ("Viskosität", "Pa·s", "mdi:water-opacity"),
-    "thermal_conductivity": ("Wärmeleitfähigkeit", "W/m·K", "mdi:heat-wave"),
+    "density": ("Dichte", "kg/m³", "mdi:water", 2),
+    "enthalpy": ("Enthalpie", "kJ/kg", "mdi:fire", 2),
+    "entropy": ("Entropie", "kJ/kg·K", "mdi:chart-bell-curve", 3),
+    "internal_energy": ("Innere Energie", "kJ/kg", "mdi:lightning-bolt", 2),
+    "cp": ("Wärmekapazität cp", "kJ/kg·K", "mdi:thermometer", 3),
+    "cv": ("Wärmekapazität cv", "kJ/kg·K", "mdi:thermometer", 3),
+    "speed_of_sound": ("Schallgeschwindigkeit", "m/s", "mdi:sine-wave", 1),
+    "viscosity": ("Viskosität", "Pa·s", "mdi:water-opacity", 6),
+    "thermal_conductivity": ("Wärmeleitfähigkeit", "W/m·K", "mdi:heat-wave", 3),
 }
 
 
@@ -26,8 +26,8 @@ async def async_setup_entry(
     async_add_entities: AddEntitiesCallback,
 ) -> None:
     sensors = [
-        IAPWSSensor(hass, entry, prop, label, unit, icon)
-        for prop, (label, unit, icon) in OUTPUT_PROPERTIES.items()
+        IAPWSSensor(hass, entry, prop, label, unit, icon, precision)
+        for prop, (label, unit, icon, precision) in OUTPUT_PROPERTIES.items()
     ]
     async_add_entities(sensors, update_before_add=True)
 
@@ -36,7 +36,7 @@ class IAPWSSensor(SensorEntity):
     _attr_state_class = SensorStateClass.MEASUREMENT
     _attr_should_poll = True
 
-    def __init__(self, hass, entry, prop, label, unit, icon):
+    def __init__(self, hass, entry, prop, label, unit, icon, precision):
         self.hass = hass
         self.entry = entry
         self._prop = prop
@@ -44,6 +44,7 @@ class IAPWSSensor(SensorEntity):
         self._attr_unique_id = f"{entry.entry_id}_{prop}"
         self._attr_native_unit_of_measurement = unit
         self._attr_icon = icon
+        self._attr_suggested_display_precision = precision
         self._attr_native_value = None
         self._attr_available = False
         self._attr_device_info = DeviceInfo(
