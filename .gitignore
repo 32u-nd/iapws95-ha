@@ -1,1 +1,3 @@
 *.code-workspace
+.venv
+dependencies.txt

@@ -1,6 +1,12 @@
 import voluptuous as vol
 from homeassistant import config_entries
-from homeassistant.helpers.selector import Selector
+from homeassistant.helpers.selector import (
+    EntitySelector,
+    EntitySelectorConfig,
+    SelectSelector,
+    SelectSelectorConfig,
+    SelectSelectorMode,
+)
 from .const import (
     DOMAIN,
     SUPPORTED_TEMP_UNITS,
@@ -18,25 +24,33 @@ class IAPWSConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 step_id="user",
                 data_schema=vol.Schema(
                     {
-                        vol.Required("temp_entity"): Selector(
-                            {"entity": {"domain": "input_number"}}
+                        vol.Required("temp_entity"): EntitySelector(
+                            EntitySelectorConfig(domain="sensor")
                         ),
-                        vol.Required("pressure_entity"): Selector(
-                            {"entity": {"domain": "input_number"}}
+                        vol.Required("pressure_entity"): EntitySelector(
+                            EntitySelectorConfig(domain="sensor")
                         ),
-                        vol.Optional("temp_unit", default="C"): vol.In(
-                            SUPPORTED_TEMP_UNITS
+                        vol.Optional("temp_unit", default="C"): SelectSelector(
+                            SelectSelectorConfig(
+                                options=SUPPORTED_TEMP_UNITS,
+                                mode=SelectSelectorMode.DROPDOWN,
+                            )
                         ),
-                        vol.Optional("pressure_unit", default="bar"): vol.In(
-                            SUPPORTED_PRESSURE_UNITS
+                        vol.Optional("pressure_unit", default="bar"): SelectSelector(
+                            SelectSelectorConfig(
+                                options=SUPPORTED_PRESSURE_UNITS,
+                                mode=SelectSelectorMode.DROPDOWN,
+                            )
                         ),
-                        vol.Optional("output_unit", default="si"): vol.In(
-                            SUPPORTED_OUTPUT_UNITS
+                        vol.Optional("output_unit", default="si"): SelectSelector(
+                            SelectSelectorConfig(
+                                options=SUPPORTED_OUTPUT_UNITS,
+                                mode=SelectSelectorMode.DROPDOWN,
+                            )
                         ),
                     }
                 ),
             )
-
         return self.async_create_entry(
             title="IAPWS95 Water Properties", data={}, options=user_input
         )
