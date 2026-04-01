@@ -1,7 +1,7 @@
 {
   "domain": "iapws95",
   "name": "IAPWS-95 Water Properties (Region 1)",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "documentation": "https://github.com/32u-nd/iapws95-ha",
   "requirements": ["iapws==1.5.3"],
   "codeowners": ["@32u-nd"],

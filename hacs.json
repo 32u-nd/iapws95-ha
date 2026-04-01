@@ -1,5 +1,9 @@
 {
   "name": "IAPWS-95 Region 1 Water Properties",
-  "domains": ["iapws95"],
+  "description": "Home Assistant integration for IAPWS-95 water properties",
+  "domains": [
+    "iapws95"
+  ],
+  "render_readme": true,
   "homeassistant": "2023.5.0"
 }
